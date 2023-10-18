@@ -7,7 +7,10 @@
  */
 void executeCommands(const char *command)
 {
-	pid_t child_pid = fork();
+	pid_t child_pid;
+	char *argv[] = {"/bin/ls", NULL};
+
+	child_pid = fork();
 
 	if (child_pid == -1)
 	{
@@ -16,9 +19,11 @@ void executeCommands(const char *command)
 	}
 	else if (child_pid == 0)
 	{
-		execlp (command, command, (char *)NULL);
-		perror("execlp");
-		exit(EXIT_FAILURE);
+		if (execve(command, argv, NULL) == -1)
+		{
+			perror("Error");
+			exit(EXIT_FAILURE);
+		}
 	}
 	else
 	{
