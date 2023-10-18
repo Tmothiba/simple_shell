@@ -7,7 +7,7 @@
 int main(void)
 {
 	char command[130];
-	
+
 	while (true)
 	{
 		displayPrompt();

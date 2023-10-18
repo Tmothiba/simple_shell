@@ -6,5 +6,5 @@
  */
 void displayPrompt(void)
 {
-	printf("simple_shell$$");
+	printf("simple_shell$$ ");
 }

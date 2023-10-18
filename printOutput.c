@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * printOuput- function that prints message to stdout
+ * printOutput- function that prints message to stdout
  * @string: message to be printed
  * @stream: integer file descriptor
  * Return: nothing
