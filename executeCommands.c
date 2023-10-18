@@ -5,10 +5,9 @@
  * @command: command entered
  * Reurn: nothing
  */
-void executeCommands(const char *command)
+void executeCommands(char *command)
 {
 	pid_t child_pid;
-	char *argv[] = {"/bin/ls", NULL};
 
 	child_pid = fork();
 
@@ -19,7 +18,24 @@ void executeCommands(const char *command)
 	}
 	else if (child_pid == 0)
 	{
-		if (execve(command, argv, NULL) == -1)
+		char *token = strtok(command, " ");
+		char *args[32];
+		int i = 0;
+
+		if (token == NULL)
+		{
+			exit(0);
+		}
+		args[i++] = token;
+
+		while ((token = strtok(NULL, " ")) != NULL)
+		{
+			args[i++] = token;
+		}
+
+		args[i] = NULL;
+
+		if (execve(args[0], args, NULL) == -1)
 		{
 			perror("Error");
 			exit(EXIT_FAILURE);
